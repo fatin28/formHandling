@@ -12,19 +12,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <div class="container">
         <h2>Tambahkan Produk</h2>
-        <form method="POST" action="/produk" enctype="multipart/form-data">
+        <form method="POST" action="{{route('tambahproduk')}}" enctype="multipart/form-data">
             {{csrf_field()}}
             <div class="form-floating mb-3">
-                <input name="namaproduk" type="text" class="form-control" id="namaproduk" placeholder="contoh: Baju tidur">
-                <label for="namaproduk">Nama Produk</label>
+                <input name="nama" type="text" class="form-control" id="nama" placeholder="Nama Produk">
+                <label for="nama">Nama Produk</label>
             </div>
             <div class="form-floating">
-                <input name="deskripsiproduk" type="text" class="form-control" id="deskripsiproduk" placeholder="Penjelasan">
-                <label for="deskripsiproduk">Deskripsi</label>
+                <input name="deskripsi" type="text" class="form-control" id="deskripsi" placeholder="Deskripsi">
+                <label for="deskripsi">Deskripsi</label>
             </div>
             <div class="mb-3">
-                <label for="formFile" class="form-label">Gambar Produk</label>
-                <input name="formFile" class="form-control" type="file" id="formFile">
+                <label for="gambar" class="form-label">Gambar Produk</label>
+                <input name="gambar" class="form-control" type="file" id="gambar">
             </div>
             <div class="col-auto">
                 <button type="submit" class="btn btn-primary mb-3">Submit</button>

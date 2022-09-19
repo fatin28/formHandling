@@ -14,7 +14,8 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        //
+        $data = Produk::all();
+        return view('produk.tampil', compact('data'));
     }
 
     /**
@@ -35,11 +36,24 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        $produk = new Produk;
-        $produk->nama = request('namaproduk');
-        $produk->deskripsi = request('deskripsiproduk');
-        $produk->gambar = request()->file('formFile')->store('public/images');
-        $produk->save();
+        $this->validate($request, [
+            'nama' => 'required',
+            'deskripsi' => 'required',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg',
+        ]);
+        $file = $request->file('gambar');
+
+        $name_file = time() . "_" . $file->getClientOriginalName();
+        $tujuan_upload = 'produk';
+        $file->move($tujuan_upload, $name_file);
+
+        Produk::insert([
+            'nama' => $request->nama,
+            'deskripsi' => $request->deskripsi,
+            'gambar' => $name_file
+        ]);
+
+        return redirect('/produk/detail');
     }
 
     /**
@@ -50,7 +64,7 @@ class ProdukController extends Controller
      */
     public function show()
     {
-        return view('produk.tampil');
+        //
     }
 
     /**

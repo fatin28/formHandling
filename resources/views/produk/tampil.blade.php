@@ -16,40 +16,22 @@
             <div class="col-md-12">
                 <div class="card border-0 shadow rounded">
                     <div class="card-body">
+                        <a href="{{route('create')}}" class="btn btn-secondary mt-3">Tambah produk</a><br><br>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">Deskripsi</th>
-                                    <th scope="col">Gambar</th>
+                                    <th scope="col">Nama Produk</th>
+                                    <th scope="col">Deskripsi Produk</th>
+                                    <th scope="col">Gambar Produk</th>
                                 </tr>
                             </thead>
-                            <?php
-                            $servername = "localhost";
-                            $username = "root";
-                            $password = "";
-                            $dbname = "tsa_31";
-                            //Create connection
-                            $conn = new mysqli($servername, $username, $password, $dbname);
-                            //Check connection
-                            if ($conn->connect_error) {
-                                die("Connection failed: " . $conn->connect_error);
-                            }
-                            ?>
-
-                            <?php
-                            $no = 1;
-                            $query = mysqli_query($conn, 'SELECT * FROM produk');
-                            while ($data = mysqli_fetch_array($query)) {
-                            ?>
-                                <tr>
-                                    <td><?php echo $no++ ?></td>
-                                    <td><?php echo $data['nama'] ?></td>
-                                    <td><?php echo $data['deskripsi'] ?></td>
-                                    <td><img src="<?php echo $data['gambar'] ?>" width="300" height="200"></td>
-                                </tr>
-                            <?php } ?>
+                            @foreach($data as $daftar)
+                            <tr>
+                                <td>{{$daftar->nama}}</td>
+                                <td>{{$daftar->deskripsi}}</td>
+                                <td><img class="img-preview img-fluid" src="{{ url('/produk/'.$daftar->gambar) }}" style="max-width: 100px;"></td>
+                            </tr>
+                            @endforeach
                         </table>
                     </div>
                 </div>
